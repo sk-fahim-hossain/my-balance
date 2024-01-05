@@ -4,6 +4,7 @@ import Income from "../Page/Income/Income";
 import Loan from "../Page/Loan/Loan";
 import Cost from "../Page/Cost/Cost";
 import Report from "../Page/Report/Report";
+import Profile from "../Page/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,10 @@ const router = createBrowserRouter([
       {
         path: "reports",
         element: <Report></Report>,
+      },
+      {
+        path: "profile",
+        element: <Profile></Profile>,
       },
     ],
   },

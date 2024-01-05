@@ -13,7 +13,12 @@ const DataProvider = ({ children }) => {
   }, []);
 
   const updateUserAccount = (details) => {
-    setUserData(details);
+    console.log(details);
+    const { name, password } = details;
+    userData.name = details.name;
+    userData.password = details.password;
+    // setUserData(details);
+    console.log(userData);
   };
 
   const allData = {

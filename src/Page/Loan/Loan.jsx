@@ -6,6 +6,7 @@ const Loan = () => {
   const [data, setData] = useState(["korim"]);
   const { userData } = useContext(DataContext);
 
+  console.log(userData);
   const handleSubmit = (event) => {
     event.preventDefault();
     const name = event.target.name.value + ",";
@@ -18,7 +19,7 @@ const Loan = () => {
         className="btn"
         onClick={() => document.getElementById("modal").showModal()}
       >
-        open modal
+        Add Loan
       </button>
       <dialog id="modal" className="modal">
         <div className="modal-box">

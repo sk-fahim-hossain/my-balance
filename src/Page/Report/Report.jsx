@@ -11,12 +11,12 @@ const Report = () => {
   const handleSubmit = (event) => {
     console.log(event);
     event.preventDefault();
-
     toast.success("User added succesfully");
   };
+
   return (
     <div>
-      <div className="grid grid-cols-2 gap-3 rounded-lg m-3 border p-3">
+      <div className="grid grid-cols-2 gap-5 rounded-lg m-3 border p-3">
         <div className="cost-reports  rounded-xl">
           <h2 className="text-2xl p-3">Cost Reports</h2>
           <table ref={printRef} className="table bg-slate-200">

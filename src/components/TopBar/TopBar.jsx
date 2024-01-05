@@ -1,4 +1,4 @@
-import React from "react";
+import { Link } from "react-router-dom";
 
 const TopBar = () => {
   const localStorageSpace = () => {
@@ -11,26 +11,34 @@ const TopBar = () => {
       : "Empty (0 KB)";
   };
 
-  const maxStorageSize = 5 * 1024 * 1024;
-  const storageUsedFloat = localStorageSpace();
-  const storageUsed = parseInt(storageUsedFloat).toFixed(3);
-  const StoragePercentage = (parseInt(storageUsed) / maxStorageSize) * 100;
+  const storageUsed = localStorageSpace();
 
-  console.log(StoragePercentage.toFixed(2));
+  const maxStorageSize = 5 * 1024 * 1024;
+  let StoragePercentage = (parseInt(storageUsed) / maxStorageSize) * 100;
+
+  const progressValue = 0;
   return (
     <div className="p-4 bg-[#0E35FF] text-white">
       <div className="flex justify-between">
         <div>
-          <p>Storage Used: {storageUsed && storageUsed}kb</p>
-          <p> {StoragePercentage.toFixed(3)}%</p>
+          <span>
+            Storage Used: {storageUsed} kb{" "}
+            {typeof StoragePercentage === Number
+              ? StoragePercentage + "%"
+              : "Not Used"}
+          </span>
+          <br />
           <progress
             className="progress progress-secondary w-56  border"
-            value={StoragePercentage.toFixed(3)}
+            defaultValue={3}
+            value={progressValue}
             max="100"
           ></progress>
         </div>
-        <div className="rounded border-2 border-black p-1 cursor-pointer">
-          <p>Here Profile Pic and Name</p>
+        <div className="flex justify-center items-center">
+          <p className="rounded-badge border-2 border-black p-2 cursor-pointer justify-center items-center hover:bg-blue-900">
+            <Link to="/profile">Profile</Link>
+          </p>
         </div>
       </div>
     </div>

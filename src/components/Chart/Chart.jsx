@@ -1,11 +1,8 @@
-import React, { PureComponent } from "react";
 import {
   BarChart,
   Bar,
-  Cell,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   Legend,
   ResponsiveContainer,
@@ -69,13 +66,3 @@ const Chart = () => {
 };
 
 export default Chart;
-
-// export default class Example extends PureComponent {
-//   static demoUrl = 'https://codesandbox.io/s/tiny-bar-chart-35meb';
-
-//   render() {
-//     return (
-
-//     );
-//   }
-// }

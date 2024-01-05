@@ -13,6 +13,8 @@ const Income = () => {
   });
 
   const allIncomes = userData?.income?.allIncomes;
+
+  console.log();
   const submitHandleIncome = (event) => {
     event.preventDefault();
     const incomeForm = event.target;
@@ -33,7 +35,7 @@ const Income = () => {
       return alert("Enter a valid number for income amount");
     }
 
-    const newBalance = userData?.income?.incomeBalance + incomeAmount;
+    const newBalance = parseInt(userData?.income?.incomeBalance) + incomeAmount;
     const updatedAllIncomes = [...userData.income.allIncomes, newIncomeReport];
     const updatedAccount = {
       ...userData,
@@ -66,6 +68,7 @@ const Income = () => {
               <p className="font-bold text-3xl">$200</p>
             </div>
           </div>
+
           <div className="w-full income-input bg-white mt-4 rounded-lg p-4 drop-shadow-md">
             <form className="w-auto" onSubmit={submitHandleIncome}>
               <div className="form-control">
@@ -126,7 +129,8 @@ const Income = () => {
             </form>
           </div>
         </div>
-        <div>
+
+        <div className="overflow-hidden">
           <small className="text-red-700">
             *this chart section is under development
           </small>

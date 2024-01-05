@@ -19,7 +19,7 @@ const getUser = () => {
   let newUser = {
     userId: 556,
     name: "",
-    password: "",
+    password: "1234",
     mainBalance: "0",
     income: {
       incomeBalance: "0",
