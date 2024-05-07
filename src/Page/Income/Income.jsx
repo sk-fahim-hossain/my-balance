@@ -1,20 +1,46 @@
-import { useContext, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import Chart from "../../components/Chart/Chart";
 import { DataContext } from "../../Provider/DataProvider";
-
 import { useReactToPrint } from "react-to-print";
 
-const Income = () => {
-  const { userData, updateUserAccount } = useContext(DataContext);
-  const printRef = useRef();
+import LocalDb from "../../components/utility/LocalDB";
+import { Navigate  } from "react-router-dom";
 
+const Income = () => {
+
+  const { userAuthData, userBalanceInfo } = useContext(DataContext)
+  const { loginInfoFromLocalDb } = LocalDb()
+  const user = loginInfoFromLocalDb(userAuthData?.userEmail)
+
+ 
+ 
+  if (!user) {
+    alert('Create user or Select any user')
+    return <Navigate to="/profile" replace={true} />
+  }
+
+  useEffect(() => {
+    fetch(`http://localhost:4000/user?${user.userEmail}`)
+        .then(res => res.json())
+        .then(data => {
+            setUserBalanceInfo(data)
+            setDashboardData(data)
+            console.log(data && data)
+        })
+}, [])
+
+  // print//
+  const printRef = useRef();
   const handlePrint = useReactToPrint({
     content: () => printRef.current,
   });
+  //print**//
 
-  const allIncomes = userData?.income?.allIncomes;
 
-  console.log();
+
+  const allIncomes = userAuthData?.income?.allIncomes;
+
+
   const submitHandleIncome = (event) => {
     event.preventDefault();
     const incomeForm = event.target;
@@ -35,17 +61,27 @@ const Income = () => {
       return alert("Enter a valid number for income amount");
     }
 
-    const newBalance = parseInt(userData?.income?.incomeBalance) + incomeAmount;
-    const updatedAllIncomes = [...userData.income.allIncomes, newIncomeReport];
-    const updatedAccount = {
-      ...userData,
-      income: { allIncomes: updatedAllIncomes, incomeBalance: newBalance },
-    };
-    localStorage.setItem("user-details", JSON.stringify(updatedAccount));
-    updateUserAccount(updatedAccount);
+    const userIncome = {
+      incomeData:newIncomeReport,
+      userData: user
+    }
+    console.log(userIncome)
+
+    fetch('http://localhost:4000/income', {
+      method: "POST",
+      body: JSON.stringify(userIncome),
+      headers:{
+        "Content-type": "application/json; charset=UTF-8"
+      }
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+
     incomeForm.reset();
   };
 
+
+  console.log(userBalanceInfo)
   return (
     <div className="p-6 bg-slate-200 rounded-3xl m-8 text-black">
       <p className="text-2xl font-bod">Income</p>
@@ -58,7 +94,7 @@ const Income = () => {
                 <small>Wallet Balance</small>
               </p>
               <p className="font-bold text-3xl">
-                ${userData?.income?.incomeBalance}
+                ${userBalanceInfo && userBalanceInfo?.mainBalance}
               </p>
             </div>
             <div className="saving-balance p-8 bg-[#0E35FF] text-white rounded-lg">
@@ -79,7 +115,7 @@ const Income = () => {
                   type="text"
                   name="incomeSource"
                   placeholder="Source of Income"
-                  className="input input-bordered text-white"
+                  className="input input-bordered "
                   required
                 />
               </div>
@@ -92,7 +128,7 @@ const Income = () => {
                     type="date"
                     name="incomeDate"
                     placeholder="Income Date"
-                    className="input input-bordered text-white"
+                    className="input input-bordered "
                     required
                   />
                 </div>
@@ -104,7 +140,7 @@ const Income = () => {
                     type="text"
                     placeholder="Amount"
                     name="incomeAmount"
-                    className="input input-bordered text-white"
+                    className="input input-bordered "
                     required
                   />
                 </div>
@@ -117,7 +153,7 @@ const Income = () => {
                   type="text"
                   placeholder="Details"
                   name="incomeDetails"
-                  className="input input-bordered text-white"
+                  className="input input-bordered "
                   required
                 />
               </div>

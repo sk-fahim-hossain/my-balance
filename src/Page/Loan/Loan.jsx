@@ -4,9 +4,9 @@ import { DataContext } from "../../Provider/DataProvider";
 
 const Loan = () => {
   const [data, setData] = useState(["korim"]);
-  const { userData } = useContext(DataContext);
+  const { userAuthData } = useContext(DataContext);
 
-  console.log(userData);
+  console.log(userAuthData);
   const handleSubmit = (event) => {
     event.preventDefault();
     const name = event.target.name.value + ",";

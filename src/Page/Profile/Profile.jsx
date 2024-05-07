@@ -1,14 +1,14 @@
 import { useContext } from "react";
 import image from "../../../src/assets/fahim.png";
 import { DataContext } from "../../Provider/DataProvider";
+import Users from "../Users/Users";
 
 const Profile = () => {
-  const { userData, updateUserAccount } = useContext(DataContext);
-  console.log(userData);
-  const userName = userData?.name ? userData.name : "Name not set";
-  console.log(userName);
+  const { userAuthData, updateUserAccount } = useContext(DataContext);
+  
+  
 
-  const handleEditUserData = (event) => {
+  const handleEdituserAuthData = (event) => {
     event.preventDefault();
 
     const form = event.target;
@@ -19,11 +19,11 @@ const Profile = () => {
     form.reset();
   };
   return (
-    <div>
+    <div className="grid grid-cols-2">
       <div className="p-5 rounded-xl m-4 bg-white">
         <img src={image} width={200} alt="" className="shadow-lg" />
         <br />
-        <form onSubmit={handleEditUserData}>
+        <form onSubmit={handleEdituserAuthData}>
           <div className="form-control">
             <label className="label">
               <span className="label-text">User Name</span>
@@ -31,7 +31,7 @@ const Profile = () => {
             <input
               type="text"
               name="name"
-              placeholder={userName}
+              placeholder="name"
               className="input input-bordered"
             />
           </div>
@@ -52,6 +52,7 @@ const Profile = () => {
           </button>
         </form>
       </div>
+      <Users></Users>
     </div>
   );
 };

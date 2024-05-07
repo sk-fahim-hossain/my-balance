@@ -3,9 +3,9 @@ import { DataContext } from "../../Provider/DataProvider";
 import toast from "react-hot-toast";
 
 const Report = () => {
-  const { userData } = useContext(DataContext);
+  const { userAuthData } = useContext(DataContext);
   const printRef = useRef(null);
-  const allIncomes = userData?.income?.allIncomes;
+  const allIncomes = userAuthData?.income?.allIncomes;
   console.log(allIncomes);
 
   const handleSubmit = (event) => {
