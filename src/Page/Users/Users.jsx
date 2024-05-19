@@ -11,17 +11,29 @@ const Users = () => {
     const { loginInLocalDb } = LocalDb()
 
     useEffect(() => {
-        fetch('http://localhost:4000/users')
+        fetch('https://my-balance-ejs4c3bet-fahim-hossains-projects.vercel.app/users')
             .then(res => res.json())
             .then(data => setUsers(data))
     }, [])
 
+    console.log(users)
+
     const handleSetUser = (user) => {
         setUserAuthData(user)
-        toast.success('User Selected Successfully!',{
-            position:"top-right"
+        toast.success('User Selected Successfully!', {
+            position: "top-right"
         })
         loginInLocalDb(user.userEmail, user)
+    }
+
+    const handleDeleteUser = (user) => {
+        console.log(user)
+        fetch(`https://my-balance-hv9tve568-fahim-hossains-projects.vercel.app/user?email=${user.userEmail}`, {
+            method : "DELETE"
+        })
+            .then(res => res.json())
+            .then(data => console.log(data))
+
     }
     return (
         <div className='w-full h-fit mx-auto bg-slate-100 p-4 border m-3 rounded-lg '>
@@ -39,6 +51,7 @@ const Users = () => {
                         </div>
                         <div>
                             <button onClick={() => handleSetUser(user)} className="btn btn-accent">Select User</button>
+                            <button onClick={() => handleDeleteUser(user)} className="btn bg-red-500">Delete</button>
                         </div>
                     </div>
 

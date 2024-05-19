@@ -20,7 +20,7 @@ const Income = () => {
   }
 
   useEffect(() => {
-    fetch(`http://localhost:4000/user?${user.userEmail}`)
+    fetch(`https://my-balance-hv9tve568-fahim-hossains-projects.vercel.app/user?${user.userEmail}`)
         .then(res => res.json())
         .then(data => {
             setUserBalanceInfo(data)
@@ -67,7 +67,7 @@ const Income = () => {
     }
     console.log(userIncome)
 
-    fetch('http://localhost:4000/income', {
+    fetch('https://my-balance-hv9tve568-fahim-hossains-projects.vercel.app/income', {
       method: "POST",
       body: JSON.stringify(userIncome),
       headers:{

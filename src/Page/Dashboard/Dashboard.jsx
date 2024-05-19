@@ -19,7 +19,7 @@ const Dashboard = () => {
 
     } else {
         useEffect(() => {
-            fetch(`http://localhost:4000/user?${user.userEmail}`)
+            fetch(`https://my-balance-l5kqes6ka-fahim-hossains-projects.vercel.app/user?${user.userEmail}`)
                 .then(res => res.json())
                 .then(data => {
                     setUserBalanceInfo(data)

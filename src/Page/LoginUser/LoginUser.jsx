@@ -12,7 +12,7 @@ const LoginUser = () => {
 
 
 
-        fetch("http://localhost:4000/create-user", {
+        fetch("https://my-balance-hv9tve568-fahim-hossains-projects.vercel.app/create-user", {
             method: "POST",
             body: JSON.stringify({
                 userName,

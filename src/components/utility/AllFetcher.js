@@ -8,7 +8,7 @@ const AllFetcher = () => {
 
 
     const addIncome = (email, incomeInfo) => {
-        fetch(`http//:localhost:4000/email=${email}`, {
+        fetch(`https://my-balance-hv9tve568-fahim-hossains-projects.vercel.app?email=${email}`, {
             method: "POST",
             body: JSON.stringify(incomeInfo),
             headers: {
@@ -19,14 +19,6 @@ const AllFetcher = () => {
             .then(data => console.log(data))
     }
 
-    // const getUserIncome = (email) => {
-    //     console.log(email, "all fetcher trigered")
-    //     fetch(`http://localhost:4000/user?${email}`)
-    //         .then(res => res.json())
-    //         .then(data => {
-    //             setUserBalanceData(data)
-    //         })
-    // }
     
 
 
